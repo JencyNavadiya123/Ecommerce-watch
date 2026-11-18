@@ -1,11 +1,14 @@
 import CommonLayout from './components/common/CommonLayout';
+import { ShopProvider } from './context/ShopContext';
 import Route from './routes/route';
 
 function App() {
   return (
-    <CommonLayout>
-      <Route />
-    </CommonLayout>
+    <ShopProvider>
+      <CommonLayout>
+        <Route />
+      </CommonLayout>
+    </ShopProvider>
   );
 }
 

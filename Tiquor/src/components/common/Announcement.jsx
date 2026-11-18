@@ -1,14 +1,8 @@
-const offers = [
-  'WELCOME TO WOW WATCHES · TIMELESS LUXURY',
-  'FREE SHIPPING ON ELIGIBLE ORDERS',
-  'EXTRA 5% OFF ON PREPAID ORDERS',
-  'EXCLUSIVE OFFERS ON SELECTED WATCHES',
-  'PREMIUM WATCHES · TIMELESS CRAFTSMANSHIP',
-  'SECURE PAYMENTS AND EASY SHOPPING',
-];
+import { ANNOUNCEMENTS } from '../../data/navigation';
 
 function Announcement() {
-  const content = [...offers, ...offers];
+  // Repeated twice so the scrolling track loops seamlessly.
+  const content = [...ANNOUNCEMENTS, ...ANNOUNCEMENTS];
 
   return (
     <div className="announcement" role="region" aria-label="Promotional announcements">

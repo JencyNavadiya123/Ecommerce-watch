@@ -1,40 +1,20 @@
-import { useEffect, useState } from 'react';
+import Brands from '../components/Brands';
+import Home from '../components/Home';
 import NewArrival from '../components/NewArrival';
-import heroWatch from '../assets/hero/royal-watch.svg';
+import { useHash } from '../hooks/useHash';
+import { BRANDS_PATH, parseHash } from '../utils/hash';
 
-function HomePage() {
-  return (
-    <section className="hero-section" aria-labelledby="hero-title">
-      <div className="hero-copy">
-        <p className="eyebrow hero-eyebrow">The Royal Collection · 2026</p>
-        <h1 id="hero-title">A legacy<br /><em>on your wrist.</em></h1>
-        <p className="hero-description">
-          Precision timepieces shaped by heritage, crafted for the moments that become history.
-        </p>
-        <a className="gold-button" href="#collection">Explore the collection <span>→</span></a>
-      </div>
-      <div className="hero-watch">
-        <img className="hero-watch-vector" src={heroWatch} alt="WOW WATCHES royal navy and gold luxury watch" />
-      </div>
-    </section>
-  );
-}
+// Hash path -> page. Anything not listed falls back to DEFAULT_PAGE.
+const ROUTES = {
+  '#home': Home,
+  [BRANDS_PATH]: Brands,
+};
+const DEFAULT_PAGE = NewArrival;
 
 function Route() {
-  const [hash, setHash] = useState(window.location.hash);
-
-  useEffect(() => {
-    const handleHashChange = () => setHash(window.location.hash);
-    window.addEventListener('hashchange', handleHashChange);
-
-    return () => window.removeEventListener('hashchange', handleHashChange);
-  }, []);
-
-  if (hash === '#home') {
-    return <HomePage />;
-  }
-
-  return <NewArrival />;
+  const { hash } = useHash();
+  const Page = ROUTES[parseHash(hash).path] || DEFAULT_PAGE;
+  return <Page />;
 }
 
 export default Route;
