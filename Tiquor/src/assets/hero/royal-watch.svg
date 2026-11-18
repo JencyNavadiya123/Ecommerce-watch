@@ -1,0 +1,46 @@
+<svg width="520" height="580" viewBox="0 0 520 580" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">WOW WATCHES royal watch</title>
+  <desc id="desc">A navy and champagne gold luxury watch with a burgundy strap and crown ornament</desc>
+  <defs>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(260 292) rotate(90) scale(218)">
+      <stop stop-color="#C9A96E" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#C9A96E" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="dial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(214 205) rotate(54) scale(270)">
+      <stop stop-color="#2B4D91"/>
+      <stop offset="1" stop-color="#101B3D"/>
+    </radialGradient>
+    <filter id="shadow" x="85" y="58" width="350" height="470" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="20" stdDeviation="16" flood-color="#081127" flood-opacity=".28"/>
+    </filter>
+  </defs>
+
+  <circle cx="260" cy="292" r="218" fill="url(#glow)"/>
+  <circle cx="260" cy="292" r="184" stroke="#C9A96E" stroke-opacity=".28"/>
+  <circle cx="260" cy="292" r="169" stroke="#C9A96E" stroke-opacity=".12"/>
+
+  <g filter="url(#shadow)">
+    <path d="M225 116L236 82H284L295 116L280 151H240L225 116Z" fill="#4A1825" stroke="#C9A96E" stroke-width="4"/>
+    <path d="M240 428H280L295 463L284 502H236L225 463L240 428Z" fill="#4A1825" stroke="#C9A96E" stroke-width="4"/>
+
+    <path d="M232 72L244 62L253 68L260 57L267 68L276 62L288 72L282 87H238L232 72Z" fill="#F7F3EB" stroke="#C9A96E" stroke-width="2"/>
+
+    <ellipse cx="260" cy="292" rx="101" ry="155" fill="#101B3D" stroke="#C9A96E" stroke-width="6"/>
+    <ellipse cx="260" cy="292" rx="91" ry="145" stroke="#E4C990" stroke-opacity=".45" stroke-width="2"/>
+    <circle cx="260" cy="292" r="134" fill="#101B3D" stroke="#C9A96E" stroke-width="5"/>
+    <circle cx="260" cy="292" r="119" fill="url(#dial)" stroke="#E4C990" stroke-opacity=".55" stroke-width="1.5"/>
+    <circle cx="260" cy="292" r="105" stroke="#E4C990" stroke-opacity=".25"/>
+
+    <path d="M260 194V212M260 372V390M162 292H180M340 292H358" stroke="#E4C990" stroke-width="4"/>
+    <path d="M191 223L204 236M329 223L316 236M191 361L204 348M329 361L316 348" stroke="#E4C990" stroke-width="3"/>
+
+    <text x="260" y="262" text-anchor="middle" fill="#E4C990" font-family="Cormorant Garamond, Georgia, serif" font-size="13" letter-spacing="2">WOW WATCHES</text>
+    <path d="M260 277V319" stroke="#E4C990" stroke-width="4" stroke-linecap="round"/>
+    <path d="M260 292L300 326" stroke="#E4C990" stroke-width="3.5" stroke-linecap="round"/>
+    <circle cx="260" cy="292" r="8" fill="#E4C990" stroke="#101B3D" stroke-width="3"/>
+    <path d="M244 334C244 322 251 316 260 316C269 316 276 322 276 334H244Z" fill="#C9A96E" fill-opacity=".72"/>
+
+    <rect x="356" y="272" width="17" height="48" rx="5" fill="#E4C990"/>
+    <path d="M373 279H382V313H373" fill="#4A1825" stroke="#C9A96E" stroke-width="2"/>
+  </g>
+</svg>

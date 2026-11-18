@@ -1,0 +1,10 @@
+<svg width="190" height="58" viewBox="0 0 190 58" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">WOW WATCHES</title>
+  <desc id="desc">A geometric W monogram with a refined WOW WATCHES wordmark</desc>
+  <g stroke="#E4C990">
+    <path d="M12 12L20 6L29 14L38 6L46 12L40 22L35 17L29 28L23 17L18 22L12 12Z" stroke-width="1.2"/>
+    <path d="M18 22L29 47L40 22M20 6L29 14L38 6" stroke-width="1"/>
+  </g>
+  <text x="58" y="29" fill="#F7F3EB" font-family="Cormorant Garamond, Georgia, serif" font-size="17" letter-spacing="2">WOW WATCHES</text>
+  <text x="59" y="43" fill="#C9A96E" font-family="Cormorant Garamond, Georgia, serif" font-size="8" letter-spacing="2.4">TIMELESS CRAFT</text>
+</svg>
