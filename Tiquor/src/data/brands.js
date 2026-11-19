@@ -17,8 +17,8 @@ const BRAND_DIRECTORY = [
   { name: 'Citizen', logo: 'citizen.png', founded: 1918, origin: 'Japan', tagline: 'Japanese engineering, built to outlast the day.' },
   { name: 'Daniel Wellington', logo: 'daniel-wellington.svg', founded: 2011, origin: 'Sweden', tagline: 'Scandinavian minimalism: clean dials, quiet confidence.' },
   { name: 'Casio', logo: 'casio.png', founded: 1946, origin: 'Japan', tagline: 'Tokyo invention, from data banks to chronographs.' },
-  { name: 'Philipp Plein', logo: 'philipp-plein.jpg', founded: 1998, origin: 'Germany', tagline: 'Unapologetic luxury with a rock-and-roll edge.' },
-  { name: 'Plein Sport', founded: 2016, origin: 'Switzerland', tagline: 'Performance attitude, styled for the street.' },
+  { name: 'Fossil', logo: 'fossil.svg', founded: 1984, origin: 'USA', tagline: 'Texan vintage-inspired design, made for everyday style.' },
+  { name: 'Titan', logo: 'titan.jpg', founded: 1984, origin: 'India', tagline: 'India’s own watchmaker, crafting everyday elegance since 1984.' },
   { name: 'Swatch', logo: 'swatch.png', founded: 1983, origin: 'Switzerland', tagline: 'Swiss playfulness: colour, design and pure invention.' },
 ];
 

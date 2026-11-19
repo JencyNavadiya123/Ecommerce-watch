@@ -17,6 +17,15 @@ export const sortProducts = (list, sortId) => {
   return option?.compare ? [...list].sort(option.compare) : list;
 };
 
+// takePerGroup(products, 'brand', 3) -> the first 3 products of each brand, in list order.
+export const takePerGroup = (list, key, limit) => {
+  const taken = {};
+  return list.filter((item) => {
+    taken[item[key]] = (taken[item[key]] || 0) + 1;
+    return taken[item[key]] <= limit;
+  });
+};
+
 // countBy(products, 'brand') -> { Timex: 5, Guess: 3, ... }
 export const countBy = (list, key) => list.reduce((counts, item) => {
   counts[item[key]] = (counts[item[key]] || 0) + 1;

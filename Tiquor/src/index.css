@@ -51,7 +51,6 @@ h6 {
 .bag-status,
 .na-badge,
 .na-price,
-.na-stats dd,
 .na-results,
 .na-brand-tabs sup,
 .product-savings,
@@ -756,8 +755,11 @@ a.mega-brand:hover .mega-brand-name {
   height: auto;
 }
 
+/* Content lines up with the 1360px page width on wide screens; the divider stays full-bleed.
+   (Percentage padding is measured against the footer's width.) */
 .site-footer {
-  padding: 62px 0;
+  --footer-gutter: max(40px, calc((100% - 1280px) / 2));
+  padding: 62px 0 0;
   background: var(--navy-deep);
   color: var(--ivory);
 }
@@ -767,8 +769,8 @@ a.mega-brand:hover .mega-brand-name {
   grid-template-columns: 1.5fr 1fr 1fr 1.6fr;
   gap: 45px;
   padding-bottom: 55px;
-  padding-right: 40px;
-  padding-left: 40px;
+  padding-right: var(--footer-gutter);
+  padding-left: var(--footer-gutter);
 }
 
 .footer-brand-block img {
@@ -847,14 +849,17 @@ a.mega-brand:hover .mega-brand-name {
 
 .footer-bottom {
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   justify-content: space-between;
-  padding-top: 21px;
-  padding-right: 40px;
-  padding-left: 40px;
+  gap: 8px 24px;
   border-top: 1px solid rgba(201, 169, 110, 0.2);
+  padding: 22px var(--footer-gutter) 26px;
   color: #8992aa;
-  font-size: 15px;
+  font-size: 13px;
+  font-weight: 600;
   letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .mobile-drawer-wrap {
@@ -959,10 +964,12 @@ a.mega-brand:hover .mega-brand-name {
     padding-inline: 0;
   }
 
+  .site-footer {
+    --footer-gutter: 24px;
+  }
+
   .footer-inner {
     grid-template-columns: 1.3fr 1fr 1fr;
-    padding-right: 24px;
-    padding-left: 24px;
   }
 
   .footer-newsletter {
@@ -1023,15 +1030,14 @@ a.mega-brand:hover .mega-brand-name {
   }
 
   .site-footer {
-    padding: 45px 20px 25px;
+    --footer-gutter: 20px;
+    padding-top: 45px;
   }
 
   .footer-inner {
     grid-template-columns: 1fr 1fr;
     gap: 35px 20px;
     padding-bottom: 35px;
-    padding-right: 0;
-    padding-left: 0;
   }
 
   .footer-brand-block,
@@ -1043,13 +1049,15 @@ a.mega-brand:hover .mega-brand-name {
     max-width: none;
   }
 
+  /* Stacked on phones: copyright first, the promise underneath. */
   .footer-bottom {
-    display: grid;
-    gap: 10px;
-    font-size: 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding-top: 18px;
+    padding-bottom: 22px;
+    font-size: 12px;
     line-height: 1.5;
-    padding-right: 0;
-    padding-left: 0;
   }
 
   .mega-menu {
@@ -1094,6 +1102,12 @@ a.mega-brand:hover .mega-brand-name {
   justify-content: center;
   padding: 70px 7%;
   color: var(--ivory);
+}
+
+.arrival-showcase-copy .eyebrow {
+  margin-bottom: 20px;
+  font-size: clamp(16px, 1.5vw, 21px);
+  font-weight: 700;
 }
 
 .arrival-showcase-copy h1 {
@@ -1290,48 +1304,172 @@ a.mega-brand:hover .mega-brand-name {
 }
 
 .na-head .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  font-size: clamp(16px, 1.5vw, 21px);
   font-weight: 700;
 }
 
-.na-head-meta > p {
-  max-width: 420px;
-  margin: 0 0 26px;
-  color: var(--muted);
-  font-size: 19px;
-  line-height: 1.5;
+/* Short gold rule in front of the eyebrow */
+.na-head .eyebrow::before {
+  content: '';
+  width: 44px;
+  height: 1px;
+  flex: 0 0 auto;
+  background: var(--gold);
 }
 
-.na-stats {
+.na-head-intro {
+  max-width: 460px;
+  margin: 28px 0 0;
+  color: var(--muted);
+  font-size: 21px;
+  font-style: italic;
+  line-height: 1.45;
+}
+
+/* "This season at a glance": a framed ledger of the newest houses and the numbers. */
+.na-ledger {
+  position: relative;
+  justify-self: end;
+  width: min(100%, 520px);
+  border: 1px solid rgba(201, 169, 110, 0.55);
+  padding: 30px 32px 26px;
+  background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.55) 100%);
+  box-shadow: 0 30px 60px -48px rgba(8, 17, 39, 0.5);
+}
+
+/* Inner hairline, like a double-ruled certificate */
+.na-ledger::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(201, 169, 110, 0.22);
+  pointer-events: none;
+}
+
+.na-ledger-jewel {
+  position: absolute;
+  top: 0;
+  left: 50%;
   display: grid;
-  grid-template-columns: repeat(3, auto);
-  justify-content: start;
-  gap: 0;
-  margin: 0;
-  border-top: 1px solid var(--line);
-}
-
-.na-stats > div {
-  padding: 16px 32px 0 0;
-}
-
-.na-stats > div + div {
-  border-left: 1px solid var(--line);
-  padding-left: 32px;
-}
-
-.na-stats dt {
-  margin-bottom: 4px;
-  color: var(--muted);
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  place-items: center;
+  background: var(--navy);
+  box-shadow: 0 0 0 6px var(--ivory);
+  color: var(--gold-light);
   font-size: 12px;
+  transform: translate(-50%, -50%);
+}
+
+/* "Fresh from ............ +8 more houses" */
+.na-ledger-label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.na-ledger-label p {
+  margin: 0;
+  color: var(--muted);
+  font-family: 'Manrope', Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* Four logos share the width evenly at every screen size. */
+.na-ledger-brands {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.na-ledger-brands a {
+  display: block;
+  transition: transform 250ms ease;
+}
+
+.na-ledger-brands .brand-mark-sm {
+  width: 100%;
+  transition: border-color 250ms ease;
+}
+
+.na-ledger-brands a:hover,
+.na-ledger-brands a:focus-visible {
+  transform: translateY(-3px);
+}
+
+.na-ledger-brands a:hover .brand-mark,
+.na-ledger-brands a:focus-visible .brand-mark {
+  border-color: var(--gold);
+}
+
+.na-ledger-label .na-ledger-more {
+  color: var(--navy);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  white-space: nowrap;
+}
+
+.na-ledger-more strong {
+  color: var(--gold);
+  font-size: 13px;
+}
+
+.na-ledger-stats {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 24px 0 0;
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+}
+
+.na-ledger-stats > div {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 6px;
+}
+
+.na-ledger-stats > div + div {
+  border-left: 1px solid var(--line);
+  padding-left: 22px;
+}
+
+.na-ledger-stats dt {
+  color: var(--muted);
+  font-family: 'Manrope', Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 800;
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
-.na-stats dd {
+.na-ledger-stats dd {
   margin: 0;
   color: var(--navy);
-  font-size: 22px;
-  font-weight: 800;
+  font-size: clamp(40px, 3.6vw, 52px);
+  font-variant-numeric: lining-nums;
+  font-weight: 700;
+  line-height: 0.9;
+}
+
+.na-ledger-stats .is-accent dd {
+  color: var(--burgundy);
+  font-style: italic;
 }
 
 /* Toolbar */
@@ -1364,7 +1502,7 @@ a.mega-brand:hover .mega-brand-name {
   display: none;
 }
 
-.na-brand-tabs button {
+.na-brand-tabs :is(button, a) {
   position: relative;
   flex: 0 0 auto;
   padding: 20px 0 18px;
@@ -1377,7 +1515,7 @@ a.mega-brand:hover .mega-brand-name {
   transition: color 180ms ease;
 }
 
-.na-brand-tabs button::after {
+.na-brand-tabs :is(button, a)::after {
   content: '';
   position: absolute;
   right: 0;
@@ -1390,12 +1528,12 @@ a.mega-brand:hover .mega-brand-name {
   transition: transform 220ms ease;
 }
 
-.na-brand-tabs button:hover,
-.na-brand-tabs button.is-active {
+.na-brand-tabs :is(button, a):hover,
+.na-brand-tabs :is(button, a).is-active {
   color: var(--navy);
 }
 
-.na-brand-tabs button.is-active::after {
+.na-brand-tabs :is(button, a).is-active::after {
   transform: scaleX(1);
 }
 
@@ -1551,6 +1689,208 @@ a.mega-brand:hover .mega-brand-name {
   color: var(--muted);
   font-size: 22px;
   text-align: center;
+}
+
+/* Home page: latest arrivals + link to the full listing */
+.na-latest {
+  margin-top: 8px;
+}
+
+.na-view-all {
+  display: flex;
+  justify-content: center;
+  margin-top: 56px;
+  border-top: 1px solid var(--line);
+  padding-top: 48px;
+}
+
+/* Style / collection pages (components/Category.jsx).
+   The opening reuses the brand-page stage (.bh) with the All brands arch trio (.bx-collage). */
+.bh.ch h1 {
+  font-size: clamp(56px, 7vw, 112px);
+  line-height: 0.92;
+}
+
+.bh.ch h1 em {
+  color: var(--gold-light);
+}
+
+/* The arches open Quick View, so they're buttons: drop the default button look. */
+.ch-collage .bx-collage-item {
+  border: 0;
+  padding: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+}
+
+.na-shop.ch-shop {
+  padding-top: 0;
+}
+
+/* Control strip under the hero: style and collection pills. Pins to the top on scroll. */
+.ch-toolbar {
+  position: sticky;
+  z-index: 4;
+  top: 0;
+  margin: 0 -40px;
+  border-bottom: 1px solid var(--line);
+  padding: 16px 40px;
+  background: rgba(247, 243, 235, 0.92);
+  box-shadow: 0 22px 34px -30px rgba(8, 17, 39, 0.55);
+  backdrop-filter: blur(10px);
+}
+
+.ch-tabs {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 28px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.ch-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.ch-tab-group {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 14px;
+}
+
+.ch-tab-group + .ch-tab-group {
+  border-left: 1px solid var(--line);
+  padding-left: 28px;
+}
+
+.ch-label {
+  color: var(--gold);
+  font-family: 'Manrope', Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.ch-chips {
+  display: flex;
+  gap: 6px;
+}
+
+.ch-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 14px 8px 16px;
+  background: #ffffff;
+  color: var(--navy);
+  font-size: 16px;
+  line-height: 1;
+  white-space: nowrap;
+  transition: background 200ms ease, border-color 200ms ease, color 200ms ease;
+}
+
+.ch-chip:hover {
+  border-color: var(--gold);
+}
+
+.ch-chip.is-active {
+  border-color: var(--navy);
+  background: var(--navy);
+  color: var(--ivory);
+}
+
+.ch-chip-count {
+  display: inline-grid;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  padding: 0 6px;
+  place-items: center;
+  background: rgba(201, 169, 110, 0.16);
+  color: #9a7b45;
+  font-family: 'Manrope', Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.ch-chip.is-active .ch-chip-count {
+  background: rgba(228, 201, 144, 0.18);
+  color: var(--gold-light);
+}
+
+/* Count + sort, just under the pills. */
+.ch-results {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 26px 0 30px;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.ch-sort {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.ch-sort .na-select select {
+  border-radius: 999px;
+  padding: 9px 38px 9px 16px;
+  background: #ffffff;
+}
+
+/* When the pills outgrow the row they scroll sideways; fade the edge as a hint. */
+@media (max-width: 1240px) {
+  .ch-tabs {
+    -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent);
+    mask-image: linear-gradient(90deg, #000 88%, transparent);
+    padding-right: 48px;
+  }
+}
+
+@media (max-width: 760px) {
+  .ch-toolbar {
+    margin: 0 -20px;
+    padding: 12px 20px;
+  }
+
+  .ch-tab-group + .ch-tab-group {
+    padding-left: 20px;
+  }
+
+  .ch-tabs {
+    gap: 20px;
+  }
+
+  .ch-chip {
+    font-size: 15px;
+  }
+
+  .ch-results {
+    margin: 20px 0 24px;
+    font-size: 14px;
+  }
+}
+
+.category-grid {
+  animation: bh-rise 600ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .category-grid {
+    animation: none;
+  }
 }
 
 /* Spotlight */
@@ -1763,7 +2103,11 @@ a.mega-brand:hover .mega-brand-name {
 @media (max-width: 1000px) {
   .na-head {
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 48px;
+  }
+
+  .na-ledger {
+    justify-self: start;
   }
 
   .na-toolbar {
@@ -1798,12 +2142,21 @@ a.mega-brand:hover .mega-brand-name {
     font-size: clamp(52px, 15vw, 78px);
   }
 
-  .na-stats > div {
-    padding-right: 18px;
+  .na-head-intro {
+    margin-top: 20px;
+    font-size: 19px;
   }
 
-  .na-stats > div + div {
-    padding-left: 18px;
+  .na-ledger {
+    padding: 28px 20px 22px;
+  }
+
+  .na-head .eyebrow::before {
+    display: none;
+  }
+
+  .na-ledger-stats > div + div {
+    padding-left: 14px;
   }
 
   .na-toolbar {
@@ -2159,15 +2512,81 @@ a.mega-brand:hover .mega-brand-name {
 
 /* ---------- Brand page: hero + collection (Brands.jsx: BrandHero, BrandCollection) ---------- */
 
+/* Night-blue stage: a warm gold glow behind the watch, a burgundy ember low left,
+   and faint concentric rings like a guilloché dial radiating from the arch. */
 .bh {
   position: relative;
   overflow: hidden;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid rgba(201, 169, 110, 0.45);
   padding: 56px 40px 96px;
   background:
-    radial-gradient(60% 80% at 85% 30%, rgba(201, 169, 110, 0.24), transparent 70%),
-    radial-gradient(50% 60% at 0% 100%, rgba(74, 24, 37, 0.08), transparent 70%),
-    var(--ivory);
+    radial-gradient(42% 62% at 78% 46%, rgba(228, 201, 144, 0.22), transparent 70%),
+    radial-gradient(50% 70% at 0% 100%, rgba(74, 24, 37, 0.55), transparent 70%),
+    linear-gradient(160deg, var(--navy) 0%, var(--navy-deep) 100%);
+  color: var(--ivory);
+}
+
+.bh::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-radial-gradient(circle at 78% 46%, rgba(201, 169, 110, 0.09) 0 1px, transparent 1px 46px);
+  -webkit-mask-image: radial-gradient(48% 70% at 78% 46%, #000 25%, transparent 75%);
+  mask-image: radial-gradient(48% 70% at 78% 46%, #000 25%, transparent 75%);
+  pointer-events: none;
+}
+
+/* Stacked layout: the watch sits below the copy, so the glow and rings follow it. */
+@media (max-width: 1000px) {
+  .bh {
+    background:
+      radial-gradient(70% 40% at 50% 78%, rgba(228, 201, 144, 0.2), transparent 70%),
+      radial-gradient(60% 50% at 0% 100%, rgba(74, 24, 37, 0.5), transparent 70%),
+      linear-gradient(160deg, var(--navy) 0%, var(--navy-deep) 100%);
+  }
+
+  .bh::before {
+    background: repeating-radial-gradient(circle at 50% 78%, rgba(201, 169, 110, 0.09) 0 1px, transparent 1px 40px);
+    -webkit-mask-image: radial-gradient(70% 40% at 50% 78%, #000 25%, transparent 75%);
+    mask-image: radial-gradient(70% 40% at 50% 78%, #000 25%, transparent 75%);
+  }
+}
+
+.bh .brand-crumb {
+  color: rgba(247, 243, 235, 0.62);
+}
+
+.bh .brand-crumb:hover {
+  color: var(--gold-light);
+}
+
+.bh .eyebrow {
+  color: var(--gold);
+}
+
+/* Gold call-to-action on the dark stage. */
+.bh .gold-button {
+  background: var(--gold);
+  color: var(--navy-deep);
+}
+
+.bh .gold-button:hover {
+  background: var(--gold-light);
+}
+
+/* Ivory price tag so it stands off the navy background. */
+.bh .ws-price {
+  background: var(--ivory);
+  color: var(--navy);
+  box-shadow: 0 20px 36px -14px rgba(0, 0, 0, 0.6);
+}
+
+.bh .ws-price small {
+  color: #9a7b45;
+}
+
+.bh .ws-arch .ws-frame {
+  box-shadow: 0 0 0 1px rgba(201, 169, 110, 0.35), 0 50px 90px -40px rgba(0, 0, 0, 0.75);
 }
 
 /* Giant outlined brand name drifting behind the hero. */
@@ -2182,7 +2601,7 @@ a.mega-brand:hover .mega-brand-name {
   pointer-events: none;
   user-select: none;
   white-space: nowrap;
-  -webkit-text-stroke: 1.5px rgba(16, 27, 61, 0.09);
+  -webkit-text-stroke: 1.5px rgba(201, 169, 110, 0.14);
   animation: bh-drift 26s ease-in-out infinite alternate;
 }
 
@@ -2202,7 +2621,7 @@ a.mega-brand:hover .mega-brand-name {
 
 .bh h1 {
   margin: 0 0 18px;
-  color: var(--navy);
+  color: var(--ivory);
   font-size: clamp(64px, 9vw, 140px);
   line-height: 0.86;
 }
@@ -2210,7 +2629,7 @@ a.mega-brand:hover .mega-brand-name {
 .bh-tagline {
   max-width: 520px;
   margin: 0 0 34px;
-  color: var(--burgundy);
+  color: var(--gold-light);
   font-size: clamp(22px, 2vw, 28px);
   font-style: italic;
   line-height: 1.3;
@@ -2237,7 +2656,7 @@ a.mega-brand:hover .mega-brand-name {
 
 .bh-facts dt {
   margin-bottom: 4px;
-  color: var(--muted);
+  color: rgba(247, 243, 235, 0.55);
   font-family: 'Manrope', Arial, sans-serif;
   font-size: 11px;
   font-weight: 700;
@@ -2247,7 +2666,7 @@ a.mega-brand:hover .mega-brand-name {
 
 .bh-facts dd {
   margin: 0;
-  color: var(--navy);
+  color: var(--ivory);
   font-family: 'Manrope', Arial, sans-serif;
   font-size: 20px;
   font-variant-numeric: lining-nums tabular-nums;
@@ -3077,30 +3496,82 @@ a.mega-brand:hover .mega-brand-name {
 /* ---------- All brands opening (components/brand/BrandsHero.jsx) ---------- */
 
 .bx {
+  position: relative;
+  isolation: isolate;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   align-items: center;
   gap: 48px 64px;
   margin-bottom: 72px;
+  padding-bottom: 64px;
+  --bx-focus: 72% 40%;
+}
+
+/* Night-navy stage matching the Brands mega menu, stretched edge to edge behind the
+   centred content (the app shell clips the overflow). */
+.bx::before,
+.bx::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: -100px;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  pointer-events: none;
+}
+
+.bx::before {
+  border-bottom: 1px solid rgba(201, 169, 110, 0.26);
+  background:
+    linear-gradient(90deg, transparent, var(--gold) 20%, var(--gold-light) 50%, var(--gold) 80%, transparent) top / 100% 1px no-repeat,
+    radial-gradient(120% 140% at 88% -10%, rgba(74, 24, 37, 0.55), transparent 55%),
+    radial-gradient(80% 120% at 0% 100%, rgba(201, 169, 110, 0.08), transparent 60%),
+    linear-gradient(165deg, #0d1834 0%, var(--navy-deep) 58%, #050b1c 100%);
+}
+
+/* Sunray texture fanning out from the arches, like a sunburst watch dial. */
+.bx::after {
+  background: repeating-conic-gradient(from 0deg at var(--bx-focus), rgba(228, 201, 144, 0.08) 0deg 0.6deg, transparent 0.6deg 5deg);
+  -webkit-mask-image: radial-gradient(45% 65% at var(--bx-focus), #000 20%, transparent 72%);
+  mask-image: radial-gradient(45% 65% at var(--bx-focus), #000 20%, transparent 72%);
+}
+
+.bx .eyebrow {
+  color: var(--gold);
 }
 
 .bx-copy h1 {
   margin: 0 0 22px;
-  color: var(--navy);
+  color: var(--ivory);
   font-size: clamp(64px, 8vw, 120px);
   line-height: 0.88;
 }
 
 .bx-copy h1 em {
-  color: var(--burgundy);
+  color: var(--gold-light);
 }
 
 .bx-intro {
   max-width: 460px;
   margin: 0 0 32px;
-  color: var(--muted);
+  color: rgba(247, 243, 235, 0.72);
   font-size: 20px;
   line-height: 1.5;
+}
+
+.bx .gold-button {
+  background: var(--gold);
+  color: var(--navy-deep);
+}
+
+.bx .gold-button:hover {
+  background: var(--gold-light);
+}
+
+.bx .ws-arch .ws-frame {
+  box-shadow: 0 0 0 1px rgba(201, 169, 110, 0.35), 0 40px 70px -34px rgba(0, 0, 0, 0.8);
 }
 
 /* Fanned trio of arch-framed watches. */
@@ -3171,7 +3642,7 @@ a.mega-brand:hover .mega-brand-name {
 .bx-collage-name {
   display: block;
   margin-top: 14px;
-  color: var(--navy);
+  color: var(--gold-light);
   font-family: 'Manrope', Arial, sans-serif;
   font-size: 11px;
   font-weight: 800;
@@ -3205,7 +3676,7 @@ a.mega-brand:hover .mega-brand-name {
 
 .bx-stats dd {
   margin: 0;
-  color: var(--navy);
+  color: var(--ivory);
   font-size: clamp(44px, 5vw, 66px);
   font-variant-numeric: lining-nums tabular-nums;
   font-weight: 700;
@@ -3213,7 +3684,7 @@ a.mega-brand:hover .mega-brand-name {
 }
 
 .bx-stats dt {
-  color: var(--muted);
+  color: rgba(228, 201, 144, 0.75);
   font-family: 'Manrope', Arial, sans-serif;
   font-size: 11px;
   font-weight: 700;
@@ -3224,6 +3695,7 @@ a.mega-brand:hover .mega-brand-name {
 @media (max-width: 1000px) {
   .bx {
     grid-template-columns: 1fr;
+    --bx-focus: 50% 55%;
   }
 
   .bx-collage {
@@ -3237,6 +3709,13 @@ a.mega-brand:hover .mega-brand-name {
   .bx {
     gap: 36px;
     margin-bottom: 56px;
+    padding-bottom: 44px;
+  }
+
+  /* Matches the shop's smaller top padding on phones. */
+  .bx::before,
+  .bx::after {
+    top: -64px;
   }
 
   .bx-copy h1 {
@@ -3280,6 +3759,1031 @@ a.mega-brand:hover .mega-brand-name {
   }
 
   .bx-collage-item {
+    transition: none;
+  }
+}
+
+/* ---------- Our story (components/About.jsx) ---------- */
+
+.story-hero .bh-inner {
+  min-height: 520px;
+}
+
+.bh.story-hero h1 {
+  font-size: clamp(56px, 7vw, 112px);
+  line-height: 0.92;
+}
+
+.story-hero h1 em {
+  color: var(--gold-light);
+}
+
+.story-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px 28px;
+}
+
+.story-actions.is-centered {
+  justify-content: center;
+}
+
+.story-text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  border-bottom: 1px solid rgba(201, 169, 110, 0.6);
+  padding: 0 0 3px;
+  background: none;
+  color: var(--ivory);
+  cursor: pointer;
+  font-size: 18px;
+  transition: color 180ms ease;
+}
+
+.story-text-link:hover {
+  color: var(--gold-light);
+}
+
+/* Live dial */
+.story-hero-visual {
+  justify-self: center;
+  width: min(100%, 420px);
+}
+
+.story-dial {
+  margin: 0;
+}
+
+.story-dial svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 40px 60px rgba(0, 0, 0, 0.55));
+}
+
+.story-dial-numeral {
+  fill: var(--gold-light);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.story-dial-brand {
+  fill: rgba(228, 201, 144, 0.7);
+  font-family: 'Manrope', Arial, sans-serif;
+  font-size: 7px;
+  font-weight: 800;
+  letter-spacing: 0.32em;
+}
+
+.story-dial-hand {
+  transform-origin: 150px 150px;
+  transform-box: view-box;
+}
+
+.story-dial figcaption {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 12px;
+  margin-top: 22px;
+  color: rgba(247, 243, 235, 0.6);
+  font-family: 'Manrope', Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.story-dial figcaption strong {
+  color: var(--gold-light);
+  font-size: 18px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
+}
+
+/* Manifesto */
+.story-manifesto {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 110px 40px 90px;
+  text-align: center;
+}
+
+.story-ornament {
+  display: inline-block;
+  margin-bottom: 26px;
+  color: var(--gold);
+  font-size: 22px;
+}
+
+.story-manifesto blockquote {
+  margin: 0;
+}
+
+.story-manifesto blockquote p {
+  margin: 0 0 28px;
+  color: var(--navy);
+  font-size: clamp(30px, 3.6vw, 50px);
+  font-style: italic;
+  line-height: 1.22;
+}
+
+.story-manifesto blockquote footer {
+  color: var(--gold);
+  font-family: 'Manrope', Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.story-manifesto blockquote footer::before {
+  content: '\2014\00a0';
+}
+
+/* Chapters */
+.story-chapters {
+  display: grid;
+  gap: 110px;
+  max-width: 1360px;
+  margin: 0 auto;
+  border-top: 1px solid var(--line);
+  padding: 110px 40px 120px;
+  scroll-margin-top: 20px;
+}
+
+.story-chapter {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  align-items: center;
+  gap: clamp(40px, 7vw, 120px);
+}
+
+.story-chapter.is-reversed .story-chapter-copy {
+  order: 2;
+}
+
+.story-chapter-copy {
+  max-width: 560px;
+}
+
+/* Large outlined chapter numeral above the text. */
+.story-numeral {
+  display: block;
+  margin-bottom: 18px;
+  color: transparent;
+  font-size: clamp(84px, 8vw, 128px);
+  font-weight: 700;
+  line-height: 0.8;
+  -webkit-text-stroke: 1.5px var(--gold);
+}
+
+.story-chapter h2 {
+  margin: 0 0 20px;
+  color: var(--navy);
+  font-size: clamp(34px, 3.6vw, 52px);
+  line-height: 1.05;
+}
+
+.story-chapter-copy > p:not(.eyebrow) {
+  margin: 0;
+  color: var(--muted);
+  font-size: 20px;
+  line-height: 1.6;
+}
+
+.story-chapter-visual {
+  justify-self: center;
+  width: min(100%, 380px);
+}
+
+.story-chapter-visual .ws-feature {
+  width: 100%;
+}
+
+/* Heritage dial (components/about/HeritageDial.jsx): houses as hour markers on a watch face. */
+.story-heritage {
+  overflow: hidden;
+  padding: 110px 0 120px;
+  background:
+    radial-gradient(120% 140% at 88% -10%, rgba(74, 24, 37, 0.55), transparent 55%),
+    radial-gradient(80% 120% at 0% 100%, rgba(201, 169, 110, 0.08), transparent 60%),
+    linear-gradient(165deg, #0d1834 0%, var(--navy-deep) 58%, #050b1c 100%);
+  color: var(--ivory);
+}
+
+.story-heritage-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  align-items: center;
+  gap: clamp(40px, 6vw, 96px);
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.story-heritage-copy h2 {
+  margin: 0 0 18px;
+  color: var(--ivory);
+  font-size: clamp(38px, 4.2vw, 60px);
+  line-height: 1.02;
+}
+
+.story-heritage-intro {
+  max-width: 460px;
+  margin: 0;
+  color: rgba(247, 243, 235, 0.7);
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.story-heritage-detail {
+  max-width: 460px;
+  margin-top: 40px;
+  border-top: 1px solid rgba(201, 169, 110, 0.3);
+  padding-top: 30px;
+  animation: bh-rise 520ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.story-heritage-year {
+  display: block;
+  color: var(--gold-light);
+  font-size: clamp(48px, 5vw, 72px);
+  font-variant-numeric: lining-nums;
+  line-height: 1;
+}
+
+.story-heritage-detail h3 {
+  margin: 10px 0 10px;
+  color: var(--ivory);
+  font-size: 32px;
+}
+
+.story-heritage-detail p {
+  margin: 0 0 22px;
+  color: rgba(247, 243, 235, 0.72);
+  font-size: 20px;
+  font-style: italic;
+  line-height: 1.45;
+}
+
+/* The face. Sizes inside are in container units, so the whole dial scales as one. */
+.heritage-dial {
+  position: relative;
+  justify-self: center;
+  width: min(100%, 640px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 42%, #18264f 0%, #0d1834 55%, #070e22 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(201, 169, 110, 0.45),
+    0 0 0 12px #0b1530,
+    0 0 0 13px rgba(201, 169, 110, 0.5),
+    0 60px 120px -40px rgba(0, 0, 0, 0.85);
+  container-type: inline-size;
+}
+
+/* Minute track around the rim. */
+.heritage-dial::before {
+  content: '';
+  position: absolute;
+  inset: 2.5%;
+  border-radius: 50%;
+  background: repeating-conic-gradient(rgba(228, 201, 144, 0.5) 0deg 0.35deg, transparent 0.35deg 6deg);
+  -webkit-mask-image: radial-gradient(closest-side, transparent 94%, #000 95%);
+  mask-image: radial-gradient(closest-side, transparent 94%, #000 95%);
+  pointer-events: none;
+}
+
+.heritage-dial-ring {
+  position: absolute;
+  inset: 21%;
+  border: 1px dashed rgba(201, 169, 110, 0.22);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.heritage-dial-hand {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 31%;
+  border-radius: 2px;
+  background: linear-gradient(to top, var(--gold), var(--gold-light));
+  box-shadow: 0 0 14px rgba(228, 201, 144, 0.45);
+  transform: translate(-50%, -100%) rotate(var(--hand, 0deg));
+  transform-origin: 50% 100%;
+  transition: transform 900ms cubic-bezier(0.22, 0.8, 0.3, 1);
+}
+
+.heritage-dial-centre {
+  position: absolute;
+  z-index: 2;
+  inset: 31%;
+  display: grid;
+  place-content: center;
+  gap: 0.6cqw;
+  border: 1px solid rgba(201, 169, 110, 0.35);
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 35%, #15224a, #091230);
+  box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.8);
+  text-align: center;
+}
+
+.heritage-dial-centre-year {
+  color: var(--gold-light);
+  font-size: 9cqw;
+  font-variant-numeric: lining-nums;
+  line-height: 1;
+}
+
+.heritage-dial-centre-name {
+  color: var(--ivory);
+  font-size: max(14px, 3.4cqw);
+}
+
+.heritage-dial-centre-origin {
+  color: rgba(247, 243, 235, 0.55);
+  font-family: 'Manrope', Arial, sans-serif;
+  font-size: max(9px, 1.6cqw);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* Markers sit on a circle 39% of the face out from the centre, kept upright. */
+.heritage-dial-markers {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.heritage-dial-markers li {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(var(--a)) translateY(-39cqw) rotate(calc(var(--a) * -1));
+}
+
+.heritage-marker {
+  display: grid;
+  justify-items: center;
+  gap: 0.8cqw;
+}
+
+.heritage-marker .brand-mark {
+  width: 14cqw;
+  border-color: rgba(201, 169, 110, 0.35);
+  box-shadow: 0 10px 20px -12px rgba(0, 0, 0, 0.8);
+  transition: transform 300ms cubic-bezier(0.2, 0.7, 0.2, 1), border-color 300ms ease, box-shadow 300ms ease;
+}
+
+.heritage-marker-year {
+  color: rgba(228, 201, 144, 0.6);
+  font-family: 'Manrope', Arial, sans-serif;
+  font-size: max(9px, 1.7cqw);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  transition: color 300ms ease;
+}
+
+.heritage-marker.is-active .brand-mark {
+  border-color: var(--gold-light);
+  box-shadow: 0 0 0 2px var(--gold), 0 16px 30px -12px rgba(228, 201, 144, 0.55);
+  transform: scale(1.14);
+}
+
+.heritage-marker.is-active .heritage-marker-year {
+  color: var(--gold-light);
+}
+
+/* Hallmarks + sub-dials (components/about/Hallmarks.jsx) */
+.story-hallmarks {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 120px 40px 110px;
+}
+
+.story-hallmarks-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  align-items: end;
+  gap: 24px 64px;
+  margin-bottom: 64px;
+}
+
+.story-hallmarks-head h2 {
+  margin: 0;
+  color: var(--navy);
+  font-size: clamp(36px, 4vw, 58px);
+  line-height: 1.04;
+}
+
+.story-hallmarks-head > p {
+  max-width: 440px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 20px;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* Four quarters of a dial: gold hairlines cross at a centre jewel. */
+.hallmark-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.hallmark-grid::before,
+.hallmark-grid::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+}
+
+/* Vertical hairline */
+.hallmark-grid::before {
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--gold) 20%, var(--gold) 80%, transparent);
+}
+
+/* Horizontal hairline */
+.hallmark-grid::after {
+  top: 50%;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold) 15%, var(--gold) 85%, transparent);
+}
+
+.hallmark-jewel {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  place-items: center;
+  background: var(--navy);
+  box-shadow: 0 0 0 8px var(--ivory);
+  color: var(--gold-light);
+  font-size: 16px;
+  transform: translate(-50%, -50%);
+}
+
+.hallmark {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 28px;
+  padding: 52px 56px;
+  transition: background 400ms ease;
+}
+
+.hallmark::after {
+  content: '';
+  position: absolute;
+  inset: 18px;
+  background: radial-gradient(70% 90% at 30% 30%, rgba(201, 169, 110, 0.14), transparent 70%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 400ms ease;
+}
+
+.hallmark:hover::after {
+  opacity: 1;
+}
+
+/* Outlined numeral that fills with gold on hover. */
+.hallmark-index {
+  color: transparent;
+  font-size: clamp(64px, 6vw, 92px);
+  font-weight: 700;
+  font-variant-numeric: lining-nums;
+  line-height: 0.8;
+  -webkit-text-stroke: 1.2px var(--gold);
+  transition: color 400ms ease;
+}
+
+.hallmark:hover .hallmark-index {
+  color: var(--gold);
+}
+
+.hallmark-body {
+  position: relative;
+  z-index: 1;
+}
+
+.hallmark-icon {
+  display: inline-grid;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 18px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  place-items: center;
+  color: var(--navy);
+  transition: background 300ms ease, color 300ms ease;
+}
+
+.hallmark:hover .hallmark-icon {
+  background: var(--navy);
+  color: var(--gold-light);
+}
+
+.hallmark h3 {
+  margin: 0 0 10px;
+  color: var(--navy);
+  font-size: 28px;
+  line-height: 1.1;
+}
+
+.hallmark p {
+  max-width: 340px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+/* The store in numbers, as chronograph sub-dials. */
+.subdials {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 32px;
+  margin-top: 100px;
+  border-top: 1px solid var(--line);
+  padding-top: 72px;
+}
+
+.subdial {
+  display: grid;
+  justify-items: center;
+  gap: 22px;
+  margin: 0;
+}
+
+.subdial-face {
+  position: relative;
+  display: grid;
+  width: min(100%, 190px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  place-items: center;
+  background: radial-gradient(circle at 50% 38%, #ffffff 0%, #fbf7f0 60%, #f1e9da 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(201, 169, 110, 0.45),
+    0 0 0 7px var(--ivory),
+    0 0 0 8px rgba(201, 169, 110, 0.55),
+    0 30px 50px -30px rgba(8, 17, 39, 0.45);
+}
+
+/* Minute ticks around the sub-dial; every fifth one is longer and darker. */
+.subdial-face::before,
+.subdial-face::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.subdial-face::before {
+  inset: 7%;
+  background: repeating-conic-gradient(rgba(16, 27, 61, 0.35) 0deg 0.5deg, transparent 0.5deg 6deg);
+  -webkit-mask-image: radial-gradient(closest-side, transparent 90%, #000 91%);
+  mask-image: radial-gradient(closest-side, transparent 90%, #000 91%);
+}
+
+.subdial-face::after {
+  inset: 7%;
+  background: repeating-conic-gradient(var(--gold) 0deg 1deg, transparent 1deg 30deg);
+  -webkit-mask-image: radial-gradient(closest-side, transparent 84%, #000 85%);
+  mask-image: radial-gradient(closest-side, transparent 84%, #000 85%);
+}
+
+.subdial-face strong {
+  position: relative;
+  color: var(--navy);
+  font-size: clamp(38px, 3.6vw, 54px);
+  font-variant-numeric: lining-nums tabular-nums;
+  line-height: 1;
+}
+
+.subdial figcaption {
+  color: var(--muted);
+  font-family: 'Manrope', Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+@media (max-width: 1000px) {
+  .story-hero .bh-inner {
+    min-height: 0;
+  }
+
+  .story-hero-visual {
+    justify-self: start;
+    width: min(100%, 360px);
+  }
+
+  .story-chapter,
+  .story-chapter.is-reversed {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+
+  .story-chapter.is-reversed .story-chapter-copy {
+    order: 0;
+  }
+
+  .story-chapter-visual {
+    justify-self: start;
+  }
+
+  .story-hallmarks-head {
+    grid-template-columns: 1fr;
+  }
+
+  .hallmark {
+    gap: 20px;
+    padding: 40px 32px;
+  }
+
+  .subdials {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 48px 24px;
+  }
+
+  .story-heritage-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .heritage-dial {
+    width: min(100%, 560px);
+  }
+}
+
+@media (max-width: 760px) {
+  .story-manifesto {
+    padding: 72px 20px 64px;
+  }
+
+  .story-chapters {
+    gap: 80px;
+    padding: 72px 20px 84px;
+  }
+
+  .story-chapter-copy > p:not(.eyebrow) {
+    font-size: 18px;
+  }
+
+  .story-heritage {
+    padding: 72px 0 84px;
+  }
+
+  .story-heritage-inner {
+    padding: 0 20px;
+  }
+
+  .story-heritage-detail h3 {
+    font-size: 26px;
+  }
+
+  .story-heritage-detail p {
+    font-size: 18px;
+  }
+
+  .story-hallmarks {
+    padding: 80px 20px 72px;
+  }
+
+  .story-hallmarks-head {
+    margin-bottom: 40px;
+  }
+
+  /* One column: the cross becomes plain dividers, and the jewel bows out. */
+  .hallmark-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hallmark-grid::before,
+  .hallmark-jewel {
+    display: none;
+  }
+
+  .hallmark-grid::after {
+    display: none;
+  }
+
+  .hallmark {
+    padding: 32px 0;
+  }
+
+  .hallmark + .hallmark {
+    border-top: 1px solid var(--line);
+  }
+
+  .hallmark::after {
+    inset: 0;
+  }
+
+  .hallmark-index {
+    font-size: 56px;
+  }
+
+  .hallmark h3 {
+    font-size: 24px;
+  }
+
+  .hallmark p {
+    font-size: 17px;
+  }
+
+  .subdials {
+    margin-top: 56px;
+    padding-top: 56px;
+  }
+
+  .subdial-face {
+    width: min(100%, 150px);
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hallmark,
+  .hallmark::after,
+  .hallmark-index,
+  .hallmark-icon,
+  .heritage-dial-hand,
+  .heritage-marker .brand-mark,
+  .story-heritage-detail {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* Invitation (components/about/StoryClosing.jsx): a navy caseback panel inset on ivory,
+   so it never runs into the navy footer. */
+.story-closing {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 40px 40px 110px;
+}
+
+.story-closing-panel {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 48px;
+  overflow: hidden;
+  padding: clamp(56px, 6vw, 88px) clamp(40px, 5vw, 80px);
+  background:
+    radial-gradient(45% 70% at 76% 50%, rgba(228, 201, 144, 0.2), transparent 70%),
+    radial-gradient(50% 80% at 0% 100%, rgba(74, 24, 37, 0.55), transparent 70%),
+    linear-gradient(160deg, var(--navy) 0%, var(--navy-deep) 100%);
+  box-shadow: 0 40px 70px -56px rgba(8, 17, 39, 0.6);
+  color: var(--ivory);
+}
+
+/* Gold hairline frame, inset like the bezel of a caseback. */
+.story-closing-panel::before {
+  content: '';
+  position: absolute;
+  inset: 14px;
+  border: 1px solid rgba(201, 169, 110, 0.35);
+  pointer-events: none;
+}
+
+.story-closing-copy {
+  position: relative;
+  z-index: 1;
+}
+
+.story-closing .eyebrow {
+  color: var(--gold);
+}
+
+.story-closing h2 {
+  margin: 0 0 22px;
+  color: var(--ivory);
+  font-size: clamp(40px, 4.6vw, 68px);
+  line-height: 1.02;
+}
+
+.story-closing h2 em {
+  color: var(--gold-light);
+}
+
+.story-closing-intro {
+  max-width: 460px;
+  margin: 0 0 36px;
+  color: rgba(247, 243, 235, 0.72);
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.story-closing .gold-button {
+  background: var(--gold);
+  color: var(--navy-deep);
+}
+
+.story-closing .gold-button:hover {
+  background: var(--gold-light);
+}
+
+.story-closing .story-text-link {
+  font-size: 17px;
+}
+
+/* Occasion shortcuts into the category pages */
+.story-moments {
+  margin-top: 48px;
+  border-top: 1px solid rgba(201, 169, 110, 0.28);
+  padding-top: 26px;
+}
+
+.story-moments > p {
+  margin: 0 0 14px;
+  color: rgba(247, 243, 235, 0.55);
+  font-family: 'Manrope', Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.story-moments ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.story-moments a {
+  display: grid;
+  gap: 2px;
+  border: 1px solid rgba(201, 169, 110, 0.3);
+  padding: 12px 16px;
+  color: var(--ivory);
+  transition: border-color 200ms ease, background 200ms ease;
+}
+
+.story-moments a span {
+  font-size: 19px;
+  font-style: italic;
+  line-height: 1.2;
+}
+
+.story-moments a small {
+  color: var(--gold);
+  font-family: 'Manrope', Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.story-moments a:hover,
+.story-moments a:focus-visible {
+  border-color: var(--gold);
+  background: rgba(201, 169, 110, 0.1);
+}
+
+/* Newest watches inside a slowly turning engraved ring */
+.story-closing-visual {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.story-closing-ring {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  width: min(118%, 560px);
+  aspect-ratio: 1;
+  overflow: visible;
+  transform: translate(-50%, -50%);
+  animation: story-ring-turn 80s linear infinite;
+  pointer-events: none;
+}
+
+.story-closing-ring circle {
+  fill: none;
+  stroke: rgba(201, 169, 110, 0.32);
+  stroke-width: 1;
+}
+
+.story-closing-ring circle + circle {
+  stroke-dasharray: 1 7;
+  stroke-width: 6;
+  stroke: rgba(201, 169, 110, 0.22);
+}
+
+.story-closing-ring text {
+  fill: rgba(228, 201, 144, 0.7);
+  font-family: 'Manrope', Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+
+@keyframes story-ring-turn {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.story-closing-collage {
+  width: min(100%, 520px);
+}
+
+@media (max-width: 1000px) {
+  .story-closing {
+    padding: 24px 24px 80px;
+  }
+
+  .story-closing-panel {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+    background:
+      radial-gradient(60% 30% at 50% 20%, rgba(228, 201, 144, 0.2), transparent 70%),
+      radial-gradient(60% 50% at 0% 100%, rgba(74, 24, 37, 0.5), transparent 70%),
+      linear-gradient(160deg, var(--navy) 0%, var(--navy-deep) 100%);
+  }
+
+  .story-closing-visual {
+    order: -1;
+  }
+
+  .story-closing-collage {
+    height: 380px;
+  }
+
+  .story-closing-ring {
+    width: min(100%, 440px);
+  }
+}
+
+@media (max-width: 760px) {
+  .story-closing {
+    padding: 16px 16px 64px;
+  }
+
+  .story-closing-panel {
+    padding: 44px 24px 40px;
+  }
+
+  .story-closing-panel::before {
+    inset: 8px;
+  }
+
+  .story-closing-intro {
+    font-size: 18px;
+  }
+
+  .story-closing-collage {
+    height: 280px;
+  }
+
+  .story-closing-ring {
+    width: min(108%, 340px);
+  }
+
+  .story-moments ul {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .story-closing-ring {
+    animation: none;
+  }
+
+  .story-moments a {
     transition: none;
   }
 }

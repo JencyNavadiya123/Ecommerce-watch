@@ -1,5 +1,6 @@
 import { ArrowUpRight } from 'lucide-react';
 import { brandDirectory } from '../../data/brands';
+import { getCategoryHref } from '../../data/categories';
 import { MENU_FEATURED_COUNT, MENU_GROUPS } from '../../data/navigation';
 import { products } from '../../data/products';
 import { brandLink, shopLink } from '../../utils/hash';
@@ -25,7 +26,10 @@ export function getMenuLinks(key) {
   }
   const genderLink = shopLink({ gender: group.gender });
   return [
-    ...group.columns.flatMap((column) => column.links).map((label) => ({ label, href: genderLink })),
+    ...group.columns.flatMap((column) => column.links).map((label) => ({
+      label,
+      href: getCategoryHref(group.gender, label) || genderLink,
+    })),
     { label: group.shopAllLabel, href: genderLink },
   ];
 }
@@ -119,7 +123,10 @@ function MegaMenu({ id, menuKey, isOpen, panelRef, onNavigate }) {
                 {group.columns.map((column) => (
                   <div className="mega-column" key={column.title}>
                     <h3>{column.title}</h3>
-                    {column.links.map((link) => <a href={genderLink} key={link} onClick={onNavigate}>{link}</a>)}
+                    {column.links.map((link) => (
+                      // Links with their own style/collection page go there; the rest open the gender listing.
+                      <a href={getCategoryHref(group.gender, link) || genderLink} key={link} onClick={onNavigate}>{link}</a>
+                    ))}
                   </div>
                 ))}
               </div>

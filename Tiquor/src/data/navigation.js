@@ -1,5 +1,5 @@
 import { SITE } from '../config/site';
-import { BRANDS_PATH, SHOP_PATH, shopLink } from '../utils/hash';
+import { ABOUT_PATH, BRANDS_PATH, SHOP_PATH, shopLink } from '../utils/hash';
 
 export const ANNOUNCEMENTS = [
   `WELCOME TO ${SITE.name} · TIMELESS LUXURY`,
@@ -11,7 +11,7 @@ export const ANNOUNCEMENTS = [
 ];
 
 export const PRIMARY_LINK = { label: 'New arrivals', href: SHOP_PATH };
-export const SECONDARY_LINK = { label: 'Our story', href: '#about' };
+export const SECONDARY_LINK = { label: 'Our story', href: ABOUT_PATH };
 
 // How many product photos the Men / Women menus show on the right.
 export const MENU_FEATURED_COUNT = 3;
