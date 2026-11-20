@@ -2,6 +2,11 @@
 export const SHOP_PATH = '#new';
 export const BRANDS_PATH = '#brands';
 export const ABOUT_PATH = '#about';
+// Service pages (components/Service.jsx, copy in data/service.js).
+export const SHIPPING_PATH = '#shipping';
+export const CARE_PATH = '#care';
+export const WARRANTY_PATH = '#warranty';
+export const CONTACT_PATH = '#contact';
 
 export const parseHash = (hash = window.location.hash) => {
   const [path, query = ''] = hash.split('?');

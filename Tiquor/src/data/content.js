@@ -7,7 +7,7 @@ export const HOME_CONTENT = {
   titleLead: 'A legacy',
   titleAccent: 'on your wrist.',
   description: 'Precision timepieces shaped by heritage, crafted for the moments that become history.',
-  cta: { label: 'Explore the collection', href: '#collection' },
+  cta: { label: 'Explore the collection', href: '#new' },
   heroImageAlt: `${SITE.name} royal navy and gold luxury watch`,
 };
 
@@ -49,10 +49,6 @@ export const ABOUT_CONTENT = {
     dialCaption: 'The time where you are',
     primaryCta: 'Explore the houses',
     secondaryCta: 'Read our promise',
-  },
-  manifesto: {
-    quote: 'We don’t sell time. We help you keep it: the first day of something new, the anniversary, the morning everything changed.',
-    signature: `The ${SITE.name} team`,
   },
   // `product` is a product name from data/products.js; its photo illustrates the chapter.
   chapters: [

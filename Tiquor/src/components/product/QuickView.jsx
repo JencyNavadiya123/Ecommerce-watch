@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { ShoppingBag, X } from 'lucide-react';
 import { useShop } from '../../context/ShopContext';
 import PriceTag from './PriceTag';
@@ -5,6 +6,27 @@ import ProductShowcase from '../showcase/ProductShowcase';
 
 function QuickView({ product, label, onClose }) {
   const { addToBag } = useShop();
+  const closeRef = useRef(null);
+
+  useEffect(() => {
+    closeRef.current?.focus({ preventScroll: true });
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') onClose();
+    };
+    const scrollTop = window.scrollY;
+    const previousBodyOverflow = document.body.style.overflow;
+    const previousHtmlOverflow = document.documentElement.style.overflow;
+
+    document.addEventListener('keydown', handleKeyDown);
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = previousBodyOverflow;
+      document.documentElement.style.overflow = previousHtmlOverflow;
+      window.scrollTo({ top: scrollTop, behavior: 'auto' });
+    };
+  }, [onClose]);
 
   const handleAddToBag = () => {
     addToBag(product.id);
@@ -20,7 +42,7 @@ function QuickView({ product, label, onClose }) {
         aria-labelledby="quick-view-title"
         onMouseDown={(event) => event.stopPropagation()}
       >
-        <button className="quick-view-close" type="button" aria-label="Close quick view" onClick={onClose}>
+        <button ref={closeRef} className="quick-view-close" type="button" aria-label="Close quick view" onClick={onClose}>
           <X size={21} strokeWidth={1.5} />
         </button>
         <div className="quick-view-image">

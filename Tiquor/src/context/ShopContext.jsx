@@ -13,6 +13,10 @@ export function ShopProvider({ children }) {
     bag,
     wishlist,
     addToBag: (productId) => setBag((current) => [...current, productId]),
+    removeFromBag: (productId) => setBag((current) => {
+      const index = current.indexOf(productId);
+      return index === -1 ? current : [...current.slice(0, index), ...current.slice(index + 1)];
+    }),
     toggleWishlist: (productId) => setWishlist((current) => toggleItem(current, productId)),
     isInBag: (productId) => bag.includes(productId),
     isWishlisted: (productId) => wishlist.includes(productId),

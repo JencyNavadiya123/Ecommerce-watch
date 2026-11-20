@@ -4,6 +4,8 @@ import Category from '../components/Category';
 import Home from '../components/Home';
 import NewArrival from '../components/NewArrival';
 import { useHash } from '../hooks/useHash';
+import Service from '../components/Service';
+import { SERVICE_PAGES } from '../data/service';
 import { ABOUT_PATH, BRANDS_PATH, CATEGORY_PATH, parseHash } from '../utils/hash';
 
 // Hash path -> page. Anything not listed falls back to DEFAULT_PAGE.
@@ -12,6 +14,8 @@ const ROUTES = {
   [BRANDS_PATH]: Brands,
   [CATEGORY_PATH]: Category,
   [ABOUT_PATH]: About,
+  // Shipping, care, warranty and contact share one layout; Service picks the copy from the hash.
+  ...Object.fromEntries(SERVICE_PAGES.map((page) => [page.path, Service])),
 };
 const DEFAULT_PAGE = NewArrival;
 

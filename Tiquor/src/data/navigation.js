@@ -1,5 +1,7 @@
 import { SITE } from '../config/site';
-import { ABOUT_PATH, BRANDS_PATH, SHOP_PATH, shopLink } from '../utils/hash';
+import {
+  ABOUT_PATH, BRANDS_PATH, CARE_PATH, CONTACT_PATH, SHIPPING_PATH, SHOP_PATH, WARRANTY_PATH, shopLink,
+} from '../utils/hash';
 
 export const ANNOUNCEMENTS = [
   `WELCOME TO ${SITE.name} · TIMELESS LUXURY`,
@@ -65,15 +67,14 @@ export const FOOTER_COLUMNS = [
   {
     title: 'Service',
     links: [
-      { label: 'Shipping & returns', href: '#shipping' },
-      { label: 'Care guide', href: '#care' },
-      { label: 'Warranty', href: '#warranty' },
-      { label: 'Contact us', href: '#contact' },
+      { label: 'Shipping & returns', href: SHIPPING_PATH },
+      { label: 'Care guide', href: CARE_PATH },
+      { label: 'Warranty', href: WARRANTY_PATH },
+      { label: 'Contact us', href: CONTACT_PATH },
     ],
   },
 ];
 
-export const SOCIAL_LINK = { label: 'Instagram', href: '#instagram' };
 
 export const NEWSLETTER = {
   title: 'Join the inner circle',

@@ -63,15 +63,6 @@ function About() {
         </div>
       </section>
 
-      {/* Manifesto */}
-      <section className="story-manifesto" aria-label="Our belief">
-        <span className="story-ornament" aria-hidden="true">✦</span>
-        <blockquote>
-          <p>{text.manifesto.quote}</p>
-          <footer>{text.manifesto.signature}</footer>
-        </blockquote>
-      </section>
-
       {/* Three chapters, alternating sides */}
       <section className="story-chapters" ref={promiseRef} aria-label="How we work">
         {text.chapters.map((chapter, index) => {
